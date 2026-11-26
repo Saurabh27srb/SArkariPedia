@@ -36,6 +36,14 @@ FAIL_THRESHOLD = 3  # consecutive failures before hiding a site
 
 def connect() -> sqlite3.Connection:
     """Return a connected, schema-initialised SQLite connection."""
+    if not os.path.exists(DB_PATH):
+        bundled_db = os.path.join(os.path.dirname(__file__), "..", "data", "gov_sites.db")
+        if os.path.exists(bundled_db) and os.path.abspath(DB_PATH) != os.path.abspath(bundled_db):
+            import shutil
+            db_dir = os.path.dirname(DB_PATH)
+            if db_dir:
+                os.makedirs(db_dir, exist_ok=True)
+            shutil.copy2(bundled_db, DB_PATH)
     con = sqlite3.connect(DB_PATH)
     con.row_factory = sqlite3.Row
     con.executescript(SCHEMA)

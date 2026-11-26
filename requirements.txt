@@ -2,5 +2,6 @@ flask>=3.0
 requests>=2.31
 beautifulsoup4>=4.12
 flask-cors>=4.0
+gunicorn>=21.2
 # Optional: uncomment for JS-rendered pages
 # playwright>=1.40

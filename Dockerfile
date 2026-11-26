@@ -14,12 +14,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 # App source
 COPY . .
 
-# Data directory (DB mount karenge yahan)
-RUN mkdir -p /data
+# Data directory
+RUN mkdir -p /app/data
 
 EXPOSE 8000
 
-ENV GOV_DB=/data/gov_sites.db
+ENV GOV_DB=/app/data/gov_sites.db
 ENV PORT=8000
 ENV DEBUG=0
 

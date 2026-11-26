@@ -7,12 +7,12 @@ services:
     ports:
       - "8000:8000"
     environment:
-      GOV_DB: /data/gov_sites.db
+      GOV_DB: /app/data/gov_sites.db
       PORT: "8000"
       DEBUG: "0"
       FRONTEND_ORIGIN: "*"   # Production mein apni domain daalo
     volumes:
-      - db_data:/data
+      - db_data:/app/data
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
@@ -27,9 +27,9 @@ services:
     build: .
     command: python -m scraper.crawl all
     environment:
-      GOV_DB: /data/gov_sites.db
+      GOV_DB: /app/data/gov_sites.db
     volumes:
-      - db_data:/data
+      - db_data:/app/data
     restart: "no"           # manual ya cron se trigger karo
 
 volumes:
