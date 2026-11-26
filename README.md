@@ -86,6 +86,7 @@ SArkariPedia/
 ├── Dockerfile                          # Multi-stage production container build
 ├── docker-compose.yml                  # One-command compose deployment
 ├── requirements.txt                    # Python dependencies
+├── start.bat                           # One-click Windows startup batch script
 └── README.md                           # Project documentation
 ```
 
@@ -93,7 +94,22 @@ SArkariPedia/
 
 ## 🚀 Quick Start
 
-### 1. Local Development (Python 3.11+)
+### 1. Windows (One-Click Launch)
+
+Simply double-click **`start.bat`** (or execute `start.bat` in Command Prompt). It will automatically:
+- Verify that Python 3.10+ is installed and configured in your PATH
+- Automatically verify and install missing dependencies via `pip`
+- Start the backend web server on `http://localhost:8000`
+- Open the citizen portal directly in your default web browser
+
+```bat
+# Or from Command Prompt / PowerShell:
+start.bat
+```
+
+---
+
+### 2. Linux / macOS Local Development (Python 3.11+)
 
 ```bash
 # Clone the repository
@@ -115,7 +131,7 @@ Open your browser at `http://localhost:8000` to browse portals.
 
 ---
 
-### 2. Docker Compose Deployment
+### 3. Docker Compose Deployment
 
 ```bash
 # Build and run the web application container
