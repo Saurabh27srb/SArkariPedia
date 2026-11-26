@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  # ── Flask API ───────────────────────────────────────────────────
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      GOV_DB: /data/gov_sites.db
+      PORT: "8000"
+      DEBUG: "0"
+      FRONTEND_ORIGIN: "*"   # Production mein apni domain daalo
+    volumes:
+      - db_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+
+  # ── Weekly crawler worker ───────────────────────────────────────
+  # Yeh container seed + crawl + check + clean karta hai phir band ho jaata hai
+  # Cron se weekly trigger karo: docker compose run --rm worker
+  worker:
+    build: .
+    command: python -m scraper.crawl all
+    environment:
+      GOV_DB: /data/gov_sites.db
+    volumes:
+      - db_data:/data
+    restart: "no"           # manual ya cron se trigger karo
+
+volumes:
+  db_data:
+    driver: local
+

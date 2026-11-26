@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# Logs
+logs/
+*.log
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+*~
+
+# Temporary & Cache files
+.cache/
+*.tmp
+
+# SQLite WAL and temporary files (keep data/gov_sites.db tracked)
+data/*.db-wal
+data/*.db-shm
+data/*.db-journal

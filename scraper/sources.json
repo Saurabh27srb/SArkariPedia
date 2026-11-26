@@ -1,0 +1,145 @@
+[
+  {
+    "name": "GOI Web Directory",
+    "url": "https://goidirectory.gov.in/",
+    "max_pages": 50,
+    "note": "Main GOI directory — links category pages follow karo"
+  },
+  {
+    "name": "National Portal of India",
+    "url": "https://www.india.gov.in/",
+    "max_pages": 40,
+    "note": "India.gov.in — citizen services and ministries"
+  },
+  {
+    "name": "India.gov Ministries",
+    "url": "https://www.india.gov.in/my-government/ministries",
+    "max_pages": 10
+  },
+  {
+    "name": "India.gov State Govts",
+    "url": "https://www.india.gov.in/india-glance/states-india",
+    "max_pages": 10
+  },
+  {
+    "name": "NIC Portal",
+    "url": "https://www.nic.in/",
+    "max_pages": 20,
+    "note": "National Informatics Centre — hosts hundreds of gov sites"
+  },
+  {
+    "name": "UP Government",
+    "url": "https://up.gov.in/",
+    "max_pages": 20
+  },
+  {
+    "name": "Delhi Government",
+    "url": "https://delhi.gov.in/",
+    "max_pages": 20
+  },
+  {
+    "name": "Maharashtra Government",
+    "url": "https://maharashtra.gov.in/",
+    "max_pages": 20
+  },
+  {
+    "name": "Karnataka Government",
+    "url": "https://www.karnataka.gov.in/",
+    "max_pages": 15
+  },
+  {
+    "name": "Tamil Nadu Government",
+    "url": "https://www.tn.gov.in/",
+    "max_pages": 15
+  },
+  {
+    "name": "Kerala Government",
+    "url": "https://www.kerala.gov.in/",
+    "max_pages": 15
+  },
+  {
+    "name": "West Bengal Government",
+    "url": "https://wb.gov.in/",
+    "max_pages": 15
+  },
+  {
+    "name": "Rajasthan Government",
+    "url": "https://rajasthan.gov.in/",
+    "max_pages": 15
+  },
+  {
+    "name": "Madhya Pradesh Government",
+    "url": "https://mp.gov.in/",
+    "max_pages": 15
+  },
+  {
+    "name": "Gujarat Government",
+    "url": "https://gujaratindia.gov.in/",
+    "max_pages": 15
+  },
+  {
+    "name": "Bihar Government",
+    "url": "https://state.bihar.gov.in/",
+    "max_pages": 15
+  },
+  {
+    "name": "Haryana Government",
+    "url": "https://haryana.gov.in/",
+    "max_pages": 15
+  },
+  {
+    "name": "Punjab Government",
+    "url": "https://punjab.gov.in/",
+    "max_pages": 15
+  },
+  {
+    "name": "Odisha Government",
+    "url": "https://odisha.gov.in/",
+    "max_pages": 15
+  },
+  {
+    "name": "Assam Government",
+    "url": "https://assam.gov.in/",
+    "max_pages": 15
+  },
+  {
+    "name": "Jharkhand Government",
+    "url": "https://jharkhand.gov.in/",
+    "max_pages": 15
+  },
+  {
+    "name": "Uttarakhand Government",
+    "url": "https://uk.gov.in/",
+    "max_pages": 15
+  },
+  {
+    "name": "Telangana Government",
+    "url": "https://telangana.gov.in/",
+    "max_pages": 15
+  },
+  {
+    "name": "Andhra Pradesh Government",
+    "url": "https://ap.gov.in/",
+    "max_pages": 15
+  },
+  {
+    "name": "Himachal Pradesh Government",
+    "url": "https://himachal.nic.in/",
+    "max_pages": 15
+  },
+  {
+    "name": "Goa Government",
+    "url": "https://goa.gov.in/",
+    "max_pages": 10
+  },
+  {
+    "name": "Chhattisgarh Government",
+    "url": "https://cgstate.gov.in/",
+    "max_pages": 10
+  },
+  {
+    "name": "Open Government Data",
+    "url": "https://data.gov.in/",
+    "max_pages": 20
+  }
+]

@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SarkariPedia — Bharat ki saari government websites ek jagah</title>
+<meta name="description" content="Saari Indian government websites ek jagah — section, state aur search ke saath. SarkariPedia: Bharat ki official directory.">
+<meta name="keywords" content="sarkaripedia, sarkari sites, government websites india, gov.in, nic.in, india government portal">
+<meta property="og:title" content="SarkariPedia">
+<meta property="og:description" content="Bharat ki saari sarkari websites — section aur state ke hisaab se ek jagah">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#c9630a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ── Design tokens ─────────────────────────────────────────────────────── */
+:root {
+  --bg:        #f5f7fa;
+  --panel:     #ffffff;
+  --ink:       #0f1b2d;
+  --muted:     #5b6778;
+  --line:      #dde3ea;
+  --saffron:   #c9630a;
+  --saffron-bg:#fdf1e4;
+  --green:     #0e7c4a;
+  --red:       #b3261e;
+  --blue:      #1a56db;
+  --radius:    8px;
+}
+
+/* ── Reset ─────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Mukta", system-ui, sans-serif;
+  line-height: 1.55;
+  min-height: 100vh;
+}
+a { color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--saffron); outline-offset: 2px; }
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+header {
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  padding: 20px 24px 16px;
+}
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.header-title h1 {
+  margin: 0;
+  font-size: clamp(24px, 5vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--saffron);
+}
+.header-title .sub {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+.header-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+.btn-ghost {
+  font: inherit;
+  font-size: 14px;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  color: var(--ink);
+  transition: background .15s;
+}
+.btn-ghost:hover { background: var(--bg); }
+.btn-primary {
+  font: inherit;
+  font-size: 14px;
+  padding: 6px 14px;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--saffron);
+  color: #fff;
+  transition: opacity .15s;
+}
+.btn-primary:hover { opacity: .88; }
+
+/* ── Layout ─────────────────────────────────────────────────────────────── */
+.layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 28px;
+  max-width: 1100px;
+  margin: 24px auto 80px;
+  padding: 0 24px;
+}
+
+/* ── Sidebar nav ─────────────────────────────────────────────────────────── */
+nav {
+  position: sticky;
+  top: 16px;
+  align-self: start;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+nav .nav-heading {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 10px 14px 4px;
+}
+nav button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-left: 3px solid transparent;
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  gap: 6px;
+}
+nav button:hover { background: var(--bg); }
+nav button.active {
+  border-left-color: var(--saffron);
+  background: var(--saffron-bg);
+  font-weight: 700;
+}
+nav .count {
+  color: var(--muted);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+nav .nav-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ── Search & filters ───────────────────────────────────────────────────── */
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+  align-items: center;
+}
+.search-wrap { position: relative; flex: 1 1 240px; }
+.search-wrap svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+.tools input[type=search] {
+  width: 100%;
+  font: inherit;
+  padding: 10px 12px 10px 36px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  color: var(--ink);
+  font-size: 15px;
+}
+.tools input[type=search]:focus { border-color: var(--saffron); outline: none; box-shadow: 0 0 0 3px rgba(201,99,10,.15); }
+.tools select {
+  font: inherit;
+  font-size: 14px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  color: var(--ink);
+}
+.tools label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* ── Results meta ───────────────────────────────────────────────────────── */
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.meta { color: var(--muted); font-size: 14px; }
+
+/* ── Site cards ─────────────────────────────────────────────────────────── */
+ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+li {
+  display: grid;
+  grid-template-columns: 12px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 12px 4px;
+  border-bottom: 1px solid var(--line);
+  transition: background .1s;
+}
+li:hover { background: var(--saffron-bg); }
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #b8c0cb;
+  flex-shrink: 0;
+}
+.dot.live  { background: var(--green); }
+.dot.dead  { background: var(--red); }
+
+.site-info a {
+  font-weight: 700;
+  font-size: 17px;
+  text-decoration: none;
+  color: var(--ink);
+}
+.site-info a:hover { color: var(--saffron); text-decoration: underline; }
+.site-info .domain { color: var(--muted); font-size: 13px; display: block; }
+
+.site-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+.tag {
+  color: var(--muted);
+  font-size: 13px;
+  text-align: right;
+  white-space: nowrap;
+}
+.btn-report {
+  font: inherit;
+  font-size: 11px;
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity .15s;
+}
+li:hover .btn-report { opacity: 1; }
+.btn-report:hover { background: #fee2e2; border-color: var(--red); color: var(--red); }
+
+/* ── Pagination ─────────────────────────────────────────────────────────── */
+.pager {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.pager button {
+  font: inherit;
+  font-size: 14px;
+  padding: 8px 18px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: var(--radius);
+  color: var(--ink);
+  transition: background .1s;
+}
+.pager button:hover:not(:disabled) { background: var(--saffron-bg); border-color: var(--saffron); }
+.pager button:disabled { opacity: .4; cursor: default; }
+#pg { color: var(--muted); font-size: 14px; }
+
+/* ── Empty state ─────────────────────────────────────────────────────────── */
+.empty { padding: 48px 0; color: var(--muted); text-align: center; font-size: 16px; }
+
+/* ── Loading ─────────────────────────────────────────────────────────────── */
+.loading { padding: 32px 0; text-align: center; color: var(--muted); }
+.spinner {
+  display: inline-block;
+  width: 24px; height: 24px;
+  border: 3px solid var(--line);
+  border-top-color: var(--saffron);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Toast ───────────────────────────────────────────────────────────────── */
+#toast {
+  position: fixed;
+  bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: #1e293b;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  font-size: 15px;
+  z-index: 999;
+  opacity: 0;
+  transition: opacity .3s, transform .3s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ── Modal ───────────────────────────────────────────────────────────────── */
+.modal-backdrop {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+}
+.modal-backdrop.open { display: flex; }
+.modal {
+  background: var(--panel);
+  border-radius: 12px;
+  padding: 28px;
+  width: min(480px, 94vw);
+  box-shadow: 0 20px 60px rgba(0,0,0,.3);
+  position: relative;
+}
+.modal h2 { margin: 0 0 16px; font-size: 20px; }
+.modal label { display: block; font-size: 14px; color: var(--muted); margin: 12px 0 4px; }
+.modal input, .modal textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 15px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--ink);
+}
+.modal textarea { resize: vertical; min-height: 70px; }
+.modal .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+.modal-close {
+  position: absolute;
+  top: 12px; right: 14px;
+  font: inherit; font-size: 20px;
+  background: none; border: none;
+  color: var(--muted); line-height: 1;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+footer {
+  max-width: 1100px;
+  margin: 0 auto 40px;
+  padding: 0 24px;
+  color: var(--muted);
+  font-size: 13px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+}
+footer a { color: var(--muted); text-decoration: underline; }
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 760px) {
+  .layout { grid-template-columns: 1fr; gap: 16px; }
+  nav {
+    position: static;
+    display: flex;
+    overflow-x: auto;
+    gap: 6px;
+    padding: 8px;
+    background: none;
+    border: none;
+    border-radius: 0;
+  }
+  nav .nav-heading { display: none; }
+  nav button {
+    width: auto;
+    white-space: nowrap;
+    border: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--panel);
+    gap: 6px;
+    flex-shrink: 0;
+    font-size: 13px;
+  }
+  nav button.active { border-color: var(--saffron); background: var(--saffron-bg); }
+  li { grid-template-columns: 12px 1fr; }
+  .site-actions { display: none; }
+  .btn-report { display: none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ── Header ──────────────────────────────────────────────────────────── -->
+<header>
+  <div class="header-inner">
+    <div class="header-title">
+      <h1 id="site-title">SarkariPedia</h1>
+      <p class="sub" id="site-sub">Bharat sarkar ki websites, section ke hisaab se ek jagah.</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn-ghost" id="lang-btn" onclick="toggleLang()" title="Switch language">English</button>
+      <button class="btn-primary" onclick="openModal('suggest-modal')" id="btn-suggest">+ Site suggest karo</button>
+    </div>
+  </div>
+</header>
+
+<!-- ── Main layout ─────────────────────────────────────────────────────── -->
+<div class="layout">
+
+  <!-- Sidebar -->
+  <nav id="cats" aria-label="Sections">
+    <div class="nav-heading" id="nav-heading">Sections</div>
+  </nav>
+
+  <!-- Content -->
+  <main>
+    <!-- Filters -->
+    <div class="tools">
+      <div class="search-wrap">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input id="q" type="search" placeholder="Site ya department ka naam likho" aria-label="Search">
+      </div>
+      <select id="state" aria-label="State filter">
+        <option value="" id="state-all-opt">Saare states</option>
+      </select>
+      <label><input id="live" type="checkbox"> <span id="live-label">Sirf chalti hui sites</span></label>
+    </div>
+
+    <!-- Results meta -->
+    <div class="meta-row">
+      <p class="meta" id="meta"></p>
+    </div>
+
+    <!-- Site list -->
+    <div id="list-wrap">
+      <div class="loading"><span class="spinner"></span> <span id="loading-text">Load ho raha hai…</span></div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pager">
+      <button id="prev" disabled id="prev-btn">◀ Pichla</button>
+      <span id="pg"></span>
+      <button id="next" disabled id="next-btn">Agla ▶</button>
+    </div>
+  </main>
+</div>
+
+<!-- ── Footer ──────────────────────────────────────────────────────────── -->
+<footer>
+  <span id="footer-disclaimer">⚠️ Yeh ek independent directory hai, official government portal nahi. Har link seedha sarkari site par le jaata hai.</span>
+  <span id="footer-updated"></span>
+</footer>
+
+<!-- ── Toast ───────────────────────────────────────────────────────────── -->
+<div id="toast" role="alert" aria-live="polite"></div>
+
+<!-- ── Suggest site modal ──────────────────────────────────────────────── -->
+<div class="modal-backdrop" id="suggest-modal" role="dialog" aria-modal="true" aria-labelledby="suggest-title">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('suggest-modal')" aria-label="Close">✕</button>
+    <h2 id="suggest-title">🏛️ Site Suggest Karo</h2>
+    <label for="sug-name" id="sug-name-label">Site ka naam</label>
+    <input id="sug-name" type="text" placeholder="jaise: PM Kisan Portal">
+    <label for="sug-url" id="sug-url-label">Official URL *</label>
+    <input id="sug-url" type="url" placeholder="https://pmkisan.gov.in">
+    <label for="sug-note" id="sug-note-label">Koi baat batani hai? (optional)</label>
+    <textarea id="sug-note" placeholder="Category, state ya koi aur info…"></textarea>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal('suggest-modal')" id="cancel-btn">Cancel</button>
+      <button class="btn-primary" onclick="submitSuggest()" id="submit-suggest-btn">Bhejo</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Report broken link modal ────────────────────────────────────────── -->
+<div class="modal-backdrop" id="report-modal" role="dialog" aria-modal="true" aria-labelledby="report-title">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('report-modal')" aria-label="Close">✕</button>
+    <h2 id="report-title">🔗 Broken Link Report</h2>
+    <p id="report-site-name" style="font-weight:600;margin:0 0 12px"></p>
+    <p id="report-desc" style="color:var(--muted);font-size:14px">Kya yeh link nahi khul raha? Hum jald check karenge.</p>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal('report-modal')" id="cancel-report-btn">Cancel</button>
+      <button class="btn-primary" onclick="submitReport()" id="submit-report-btn">Report Bhejo</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Script ──────────────────────────────────────────────────────────── -->
+<script>
+/* ════════════════════════════════════════════════════
+   STATE
+   ════════════════════════════════════════════════════ */
+const S = {
+  category: "",
+  state: "",
+  q: "",
+  live: false,
+  page: 1,
+  size: 50,
+  total: 0,
+  lang: "hi",
+};
+
+let _reportTarget = null; // { id, url, name }
+
+/* ════════════════════════════════════════════════════
+   TRANSLATIONS (Hindi / English)
+   ════════════════════════════════════════════════════ */
+const T = {
+  hi: {
+    siteTitle:    "SarkariPedia",
+    siteSub:      "Bharat sarkar ki websites, section ke hisaab se ek jagah.",
+    searchPlaceholder: "Site ya department ka naam likho",
+    stateAll:     "Saare states",
+    liveLabel:    "Sirf chalti hui sites",
+    navHeading:   "Sections",
+    allSections:  "Sab sections",
+    btnSuggest:   "+ Site suggest karo",
+    prevBtn:      "◀ Pichla",
+    nextBtn:      "Agla ▶",
+    loadingText:  "Load ho raha hai…",
+    sitesFound:   (n) => `${n} sites mili`,
+    pageOf:       (p, t) => `Page ${p} / ${t}`,
+    empty:        "Kuch nahi mila. Search ya filter badal kar dekho.",
+    dotLive:      "Chal rahi hai",
+    dotDead:      "Abhi nahi khul rahi",
+    dotUnknown:   "Check nahi hui",
+    btnReport:    "Broken?",
+    footer:       "⚠️ Yeh ek independent directory hai, official government portal nahi. Har link seedha sarkari site par le jaata hai.",
+    suggestTitle: "🏛️ Site Suggest Karo",
+    sugNameLabel: "Site ka naam",
+    sugUrlLabel:  "Official URL *",
+    sugNoteLabel: "Koi baat batani hai? (optional)",
+    sugNamePh:    "jaise: PM Kisan Portal",
+    sugUrlPh:     "https://pmkisan.gov.in",
+    sugNotePh:    "Category, state ya koi aur info…",
+    cancelBtn:    "Cancel",
+    submitSuggest:"Bhejo",
+    reportTitle:  "🔗 Broken Link Report",
+    reportDesc:   "Kya yeh link nahi khul raha? Hum jald check karenge.",
+    submitReport: "Report Bhejo",
+    toastSuggest: "✅ Shukriya! Suggestion record ho gaya.",
+    toastReport:  "✅ Report mil gayi. Hum jald check karenge.",
+    toastError:   "❌ Kuch gadbad hui. Dobara koshish karo.",
+    langBtn:      "English",
+  },
+  en: {
+    siteTitle:    "SarkariPedia",
+    siteSub:      "All Indian government websites in one place, by section.",
+    searchPlaceholder: "Search by site or department name",
+    stateAll:     "All states",
+    liveLabel:    "Live sites only",
+    navHeading:   "Sections",
+    allSections:  "All sections",
+    btnSuggest:   "+ Suggest a site",
+    prevBtn:      "◀ Previous",
+    nextBtn:      "Next ▶",
+    loadingText:  "Loading…",
+    sitesFound:   (n) => `${n} sites found`,
+    pageOf:       (p, t) => `Page ${p} of ${t}`,
+    empty:        "Nothing found. Try a different search or filter.",
+    dotLive:      "Live",
+    dotDead:      "Currently unreachable",
+    dotUnknown:   "Not checked yet",
+    btnReport:    "Broken?",
+    footer:       "⚠️ This is an independent directory, not an official government portal. Every link goes directly to the official government website.",
+    suggestTitle: "🏛️ Suggest a Site",
+    sugNameLabel: "Site name",
+    sugUrlLabel:  "Official URL *",
+    sugNoteLabel: "Any additional info? (optional)",
+    sugNamePh:    "e.g.: PM Kisan Portal",
+    sugUrlPh:     "https://pmkisan.gov.in",
+    sugNotePh:    "Category, state, or any other info…",
+    cancelBtn:    "Cancel",
+    submitSuggest:"Submit",
+    reportTitle:  "🔗 Report Broken Link",
+    reportDesc:   "Is this link not loading? We will check it soon.",
+    submitReport: "Send Report",
+    toastSuggest: "✅ Thank you! Your suggestion has been recorded.",
+    toastReport:  "✅ Report received. We will check it soon.",
+    toastError:   "❌ Something went wrong. Please try again.",
+    langBtn:      "हिंदी",
+  },
+};
+
+/* ════════════════════════════════════════════════════
+   HELPERS
+   ════════════════════════════════════════════════════ */
+const $  = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c =>
+  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])
+);
+const t = key => T[S.lang][key];
+
+function showToast(msg) {
+  const el = $("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  setTimeout(() => el.classList.remove("show"), 3500);
+}
+
+function openModal(id) {
+  $(id).classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal(id) {
+  $(id).classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+// Close modal on backdrop click
+document.querySelectorAll(".modal-backdrop").forEach(el => {
+  el.addEventListener("click", e => {
+    if (e.target === el) closeModal(el.id);
+  });
+});
+
+// Close modal on Escape
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    document.querySelectorAll(".modal-backdrop.open")
+      .forEach(el => closeModal(el.id));
+  }
+});
+
+/* ════════════════════════════════════════════════════
+   LANG TOGGLE
+   ════════════════════════════════════════════════════ */
+function toggleLang() {
+  S.lang = S.lang === "hi" ? "en" : "hi";
+  applyLang();
+}
+
+function applyLang() {
+  const lang = S.lang;
+  document.documentElement.lang = lang === "hi" ? "hi" : "en";
+  $("site-title").textContent        = t("siteTitle");
+  $("site-sub").textContent          = t("siteSub");
+  $("q").placeholder                 = t("searchPlaceholder");
+  $("state-all-opt").textContent     = t("stateAll");
+  $("live-label").textContent        = t("liveLabel");
+  $("nav-heading").textContent       = t("navHeading");
+  $("lang-btn").textContent          = t("langBtn");
+  $("btn-suggest").textContent       = t("btnSuggest");
+  $("prev").textContent              = t("prevBtn");
+  $("next").textContent              = t("nextBtn");
+  $("footer-disclaimer").textContent = t("footer");
+  $("loading-text").textContent      = t("loadingText");
+  // Modal strings
+  $("suggest-title").textContent     = t("suggestTitle");
+  $("sug-name-label").textContent    = t("sugNameLabel");
+  $("sug-url-label").textContent     = t("sugUrlLabel");
+  $("sug-note-label").textContent    = t("sugNoteLabel");
+  $("sug-name").placeholder          = t("sugNamePh");
+  $("sug-url").placeholder           = t("sugUrlPh");
+  $("sug-note").placeholder          = t("sugNotePh");
+  $("cancel-btn").textContent        = t("cancelBtn");
+  $("submit-suggest-btn").textContent= t("submitSuggest");
+  $("report-title").textContent      = t("reportTitle");
+  $("report-desc").textContent       = t("reportDesc");
+  $("cancel-report-btn").textContent = t("cancelBtn");
+  $("submit-report-btn").textContent = t("submitReport");
+  // Reload categories labels
+  loadFilters();
+}
+
+/* ════════════════════════════════════════════════════
+   DATA LOADING
+   ════════════════════════════════════════════════════ */
+async function loadFilters() {
+  const [cats, states] = await Promise.all([
+    fetch("/api/categories").then(r => r.json()).catch(() => []),
+    fetch("/api/states").then(r => r.json()).catch(() => []),
+  ]);
+
+  const total = cats.reduce((a, c) => a + c.count, 0);
+  const all = [
+    { name: "", label: t("allSections"), count: total },
+    ...cats.map(c => ({ ...c, label: c.name })),
+  ];
+
+  // Build nav (keep heading)
+  const nav = $("cats");
+  const heading = nav.querySelector(".nav-heading");
+  nav.innerHTML = "";
+  nav.appendChild(heading);
+  all.forEach(c => {
+    const btn = document.createElement("button");
+    btn.dataset.c = c.name;
+    btn.className = c.name === S.category ? "active" : "";
+    btn.innerHTML = `<span class="nav-label">${esc(c.label)}</span><span class="count">${c.count}</span>`;
+    btn.onclick = () => { S.category = c.name; S.page = 1; loadFilters(); loadSites(); };
+    nav.appendChild(btn);
+  });
+
+  // Populate states dropdown (only once)
+  const sel = $("state");
+  if (sel.options.length <= 1) {
+    states.forEach(s => {
+      const opt = new Option(`${s.name} (${s.count})`, s.name);
+      sel.add(opt);
+    });
+  }
+}
+
+async function loadSites() {
+  const wrap = $("list-wrap");
+  wrap.innerHTML = `<div class="loading"><span class="spinner"></span> ${esc(t("loadingText"))}</div>`;
+
+  const p = new URLSearchParams({
+    q: S.q,
+    category: S.category,
+    state: S.state,
+    live: S.live ? "1" : "0",
+    page: S.page,
+    size: S.size,
+  });
+
+  let d;
+  try {
+    d = await fetch("/api/sites?" + p).then(r => r.json());
+  } catch {
+    wrap.innerHTML = `<div class="empty">${esc(t("toastError"))}</div>`;
+    return;
+  }
+
+  S.total = d.total;
+  $("meta").textContent = t("sitesFound")(d.total);
+
+  if (d.items.length === 0) {
+    wrap.innerHTML = `<ul><li class="empty">${esc(t("empty"))}</li></ul>`;
+  } else {
+    wrap.innerHTML = `<ul>${d.items.map(siteCard).join("")}</ul>`;
+  }
+
+  const pages = d.pages || Math.max(Math.ceil(d.total / S.size), 1);
+  $("pg").textContent = t("pageOf")(S.page, pages);
+  $("prev").disabled = S.page <= 1;
+  $("next").disabled = S.page >= pages;
+}
+
+function siteCard(s) {
+  const dotClass = s.is_live === 1 ? "live" : s.is_live === 0 ? "dead" : "";
+  const dotTitle = s.is_live === 1 ? t("dotLive") : s.is_live === 0 ? t("dotDead") : t("dotUnknown");
+  const tag = esc(s.state || s.category);
+  const checked = s.last_checked
+    ? `<span style="color:var(--muted);font-size:11px">${s.last_checked.slice(0,10)}</span>`
+    : "";
+
+  return `
+    <li>
+      <span class="dot ${dotClass}" title="${dotTitle}"></span>
+      <div class="site-info">
+        <a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.name)}</a>
+        <span class="domain">${esc(s.domain)}</span>
+      </div>
+      <div class="site-actions">
+        <span class="tag">${tag}</span>
+        ${checked}
+        <button class="btn-report" onclick="openReport(${s.id}, '${esc(s.url)}', '${esc(s.name)}')">${esc(t("btnReport"))}</button>
+      </div>
+    </li>`;
+}
+
+/* ════════════════════════════════════════════════════
+   SUGGESTIONS & REPORTS
+   ════════════════════════════════════════════════════ */
+async function submitSuggest() {
+  const name = $("sug-name").value.trim();
+  const url  = $("sug-url").value.trim();
+  const note = $("sug-note").value.trim();
+
+  if (!url) { showToast("❌ URL daalna zaroori hai."); return; }
+
+  try {
+    const r = await fetch("/api/suggest", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, url, note }),
+    });
+    const d = await r.json();
+    if (d.ok) {
+      closeModal("suggest-modal");
+      $("sug-name").value = $("sug-url").value = $("sug-note").value = "";
+      showToast(t("toastSuggest"));
+    } else {
+      showToast(t("toastError"));
+    }
+  } catch {
+    showToast(t("toastError"));
+  }
+}
+
+function openReport(id, url, name) {
+  _reportTarget = { id, url, name };
+  $("report-site-name").textContent = name;
+  openModal("report-modal");
+}
+
+async function submitReport() {
+  if (!_reportTarget) return;
+  try {
+    const r = await fetch("/api/report", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(_reportTarget),
+    });
+    const d = await r.json();
+    closeModal("report-modal");
+    showToast(d.ok ? t("toastReport") : t("toastError"));
+  } catch {
+    closeModal("report-modal");
+    showToast(t("toastError"));
+  }
+  _reportTarget = null;
+}
+
+/* ════════════════════════════════════════════════════
+   EVENT LISTENERS
+   ════════════════════════════════════════════════════ */
+let _searchTimer;
+$("q").oninput = e => {
+  clearTimeout(_searchTimer);
+  _searchTimer = setTimeout(() => { S.q = e.target.value; S.page = 1; loadSites(); }, 280);
+};
+
+$("state").onchange = e => { S.state = e.target.value; S.page = 1; loadSites(); };
+$("live").onchange  = e => { S.live = e.target.checked; S.page = 1; loadSites(); };
+$("prev").onclick   = () => { S.page--; loadSites(); scrollTo(0, 0); };
+$("next").onclick   = () => { S.page++; loadSites(); scrollTo(0, 0); };
+
+/* ════════════════════════════════════════════════════
+   INIT
+   ════════════════════════════════════════════════════ */
+(async function init() {
+  applyLang();
+  await loadFilters();
+  await loadSites();
+
+  // Show last updated time
+  try {
+    const h = await fetch("/api/health").then(r => r.json());
+    if (h.timestamp) {
+      const d = new Date(h.timestamp);
+      $("footer-updated").textContent =
+        `DB: ${h.total_sites} sites | Last checked: ${d.toLocaleDateString("en-IN")}`;
+    }
+  } catch { /* ignore */ }
+})();
+</script>
+</body>
+</html>
